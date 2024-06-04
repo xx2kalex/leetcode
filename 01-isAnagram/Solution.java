@@ -15,11 +15,12 @@ class Solution
     }
 
     System.out.println("Is every character in " + s + " also in " + t);
-    boolean foundCurChar1 = false;
+    boolean allCharsFound1 = false;
     for (int i = 0; i < sLength; i++)
     {
       char currChar1 = s.charAt(i);
       System.out.println("The current char is: " + currChar1);
+      boolean foundCurChar1 = false;
       for (int j = 0; j < tLength; j++)
       {
         if (currChar1 == t.charAt(j))
@@ -35,14 +36,20 @@ class Solution
           return false;
         }
       }
+
+      if (i == sLength - 1 && foundCurChar1 == true)
+      {
+        allCharsFound1 = true;
+      }
     }
 
     System.out.println("Is every character in " + t + " also in " + s);
-    boolean foundCurChar2 = false;
+    boolean allCharsFound2 = false;
     for (int i = 0; i < tLength; i++)
     {
       char currChar2 = t.charAt(i);
       System.out.println("The current char is: " + currChar2);
+      boolean foundCurChar2 = false;
       for (int j = 0; j < sLength; j++)
       {
         if (currChar2 == s.charAt(j))
@@ -58,9 +65,13 @@ class Solution
           isAnagram = false;
         }
       }
-    }
 
-    if (foundCurChar1 && foundCurChar2)
+      if (i == tLength - 1 && foundCurChar2 == true)
+      {
+        allCharsFound2 = true;
+      }
+    }
+    if (allCharsFound1 && allCharsFound2)
     {
       System.out.println("Each character that was in one string is also in the other.");
       isAnagram = true;
@@ -68,8 +79,9 @@ class Solution
     return isAnagram;
   }
 
+
   public static void main(String[] args)
   {
-    System.out.println(isAnagram("jar", "jam"));
+    System.out.println(isAnagram("bbcc", "ccbc"));
   }
 }
