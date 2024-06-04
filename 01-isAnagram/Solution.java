@@ -14,17 +14,21 @@ class Solution
       return false;
     }
 
-    System.out.println("Is every character in " + s + " also in " + t);
+    System.out.println("Is every character in " + s + " also in " + t + "?");
     boolean allCharsFound1 = false;
+    int countMatches1 = 0;
+    int numMatches1 = 0;
     for (int i = 0; i < sLength; i++)
     {
       char currChar1 = s.charAt(i);
       System.out.println("The current char is: " + currChar1);
       boolean foundCurChar1 = false;
+      numMatches1 = s.length() - s.replaceAll(Character.toString(currChar1), "").length();
       for (int j = 0; j < tLength; j++)
       {
         if (currChar1 == t.charAt(j))
         {
+          countMatches1++;
           System.out.println("We found the same character: " + currChar1);
           foundCurChar1 = true;
           continue;
@@ -35,6 +39,13 @@ class Solution
               "We did not find the same character, returning immediately: " + currChar1);
           return false;
         }
+        if ((j == tLength-1) && (countMatches1 != numMatches1))
+        {
+          System.out.println(
+              "Between the two strings, there exist characters which appear different amounts of " +
+                  "times.");
+          return false;
+        }
       }
 
       if (i == sLength - 1 && foundCurChar1 == true)
@@ -43,7 +54,7 @@ class Solution
       }
     }
 
-    System.out.println("Is every character in " + t + " also in " + s);
+    System.out.println("Is every character in " + t + " also in " + s + "?");
     boolean allCharsFound2 = false;
     for (int i = 0; i < tLength; i++)
     {
@@ -82,6 +93,6 @@ class Solution
 
   public static void main(String[] args)
   {
-    System.out.println(isAnagram("bbcc", "ccbc"));
+    System.out.println(isAnagram("racecar", "carrace"));
   }
 }
