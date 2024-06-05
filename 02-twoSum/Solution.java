@@ -21,7 +21,7 @@ class Solution
           continue;
         }
 
-        // Do the numbers at these two indicies add up to the target
+        // Do the numbers at these two indices add up to the target
         if (nums[i] + nums[j] == target)
         {
           // If-else logic to sort the array by lowest index
