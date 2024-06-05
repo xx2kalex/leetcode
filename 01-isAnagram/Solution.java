@@ -83,6 +83,6 @@ class Solution
   public static void main(String[] args)
   {
     System.out.println(isAnagram("bbcc", "ccbc")); // Expected: False
-    System.out.println(isAnagram("racecar", "carrace")); // Expected True
+    System.out.println(isAnagram("racecar", "carrace")); // Expected: True
   }
 }
