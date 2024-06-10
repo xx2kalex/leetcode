@@ -1,19 +1,17 @@
-import java.util.Arrays;
-class Solution
+class AnotherSolution
 {
   public static int removeDuplicates(int[] nums)
   {
     int amtOfThisInt;
     for (int i = 0; i < nums.length; i++)
     {
-      amtOfThisInt = amtOfAnInt(nums, nums[i]);
+      amtOfThisInt = amtOfAnInt(nums, i);
       if (amtOfThisInt > 1)
       {
-        nums = removeMiddle(nums, i, nums.length);
+        removeMiddle(nums, i, nums.length);
       }
     }
 
-    System.out.println(Arrays.toString(nums));
     return nums.length;
   }
 
@@ -49,15 +47,7 @@ class Solution
     }
     // No need to 'remove' arr[i], since we already shifted
 
-    int[] newArr = new int[length - 1];
-
-    for (int index = 0; index < length - 1; index++)
-    {
-      newArr[index] = arr[index];
-    }
-
-
-    return newArr;
+    return arr;
   }
 
 
@@ -65,7 +55,5 @@ class Solution
   {
     int[] nums = {0,0,1,1,1,2,2,3,3,4};
     System.out.println(removeDuplicates(nums));
-
   }
 }
-
