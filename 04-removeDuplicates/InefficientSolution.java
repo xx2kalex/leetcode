@@ -1,4 +1,4 @@
-class Solution
+class InefficientSolution
 {
   /**
    * Removes duplicates from an array in place such that each unique element appears only once
