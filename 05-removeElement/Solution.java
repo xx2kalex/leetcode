@@ -11,54 +11,61 @@ class Solution
 
     int placeholder;
     int k = nums.length - 1;
-    int legalVals = nums.length;
-    int totalIterations = 0;
-    for (int i = 0; i < nums.length; i++)
+    int startOverPoint = 0;
+    int amtOfIllegalInt = amtOfAnInt(nums, val);
+    int legalVals = nums.length - amtOfIllegalInt;
+    int illegalValsFound = 0;
+
+    // Edge Case: there are no legal values
+    if (legalVals == 0)
     {
-      if (totalIterations == k+1)
+      return 0;
+    }
+
+    for (startOverPoint = 0; startOverPoint < nums.length; startOverPoint++)
+    {
+      if (illegalValsFound == amtOfIllegalInt)
       {
         return legalVals;
       }
 
       // Edge Case: the illegal value is the first value
-      if (i == 0 && nums[i] == val)
+      if (startOverPoint == 0 && nums[startOverPoint] == val)
       {
-        // Swap last and first values;
-        placeholder = nums[i];
-        for (int j = 1; j < nums.length; j++)
+        if (nums.length == 1)
         {
-          nums[j-1] = nums[j];
+          return k;
         }
-        nums[k-1] = placeholder;
+        else
+        {
+          // Swap last and first values;
+          placeholder = nums[startOverPoint];
+          for (int j = 1; j < nums.length; j++)
+          {
+            nums[j - 1] = nums[j];
+          }
+          nums[k] = placeholder;
+        }
 
-        i = -1;
-        legalVals--;
-        totalIterations = 0;
+        startOverPoint = startOverPoint - 1;
+        illegalValsFound++;
         continue;
       }
 
       // Assigns the illegal value to the end of the list and shifts everything else left
-      if ((nums[i] == val) && (i != 0))
+      if ((nums[startOverPoint] == val) && (startOverPoint != 0))
       {
-        placeholder = nums[i];
-        for (int j = i + 1; j < nums.length; j++)
+        placeholder = nums[startOverPoint];
+        for (int j = startOverPoint + 1; j < nums.length; j++)
         {
-          nums[j-1] = nums[j];
+          nums[j - 1] = nums[j];
         }
-        nums[k-1] = placeholder;
+        nums[k] = placeholder;
 
-        i = -1;
-        legalVals--;
-        totalIterations = 0;
+        startOverPoint = startOverPoint - 1;
+        illegalValsFound++;
         continue;
       }
-
-      else
-      {
-        totalIterations++;
-      }
-
-      System.out.println(Arrays.toString(nums));
     }
 
     return legalVals;
@@ -87,12 +94,13 @@ class Solution
     return numMatches;
   }
 
+
   public static void main(String[] args)
   {
-    int[] nums = {0,1,2,2,3,0,4,2};
-    int val = 2;
+    int[] nums = {4,5};
+    int val = 4;
     System.out.println(removeElement(nums, val));
-    System.out.println(Arrays.toString(nums));
+    System.out.println("Final ans: " + Arrays.toString(nums));
   }
 }
 
