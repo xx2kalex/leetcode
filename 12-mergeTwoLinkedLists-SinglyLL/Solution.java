@@ -6,26 +6,10 @@ class Solution
     ListNode current = start;
     ListNode head1 = list1;
     ListNode head2 = list2;
-    ListNode toReturn;
 
     if (head1 == null && head2 == null)
     {
       return null;
-    }
-    else
-    {
-      if (head1.val < head2.val)
-      {
-        current = head1;
-        toReturn = head1;
-        head1 = head1.next;
-      }
-      else
-      {
-        current = head2;
-        toReturn = head2;
-        head2 = head2.next;
-      }
     }
 
     while ((head1 != null) && (head2 != null))
@@ -44,37 +28,38 @@ class Solution
       current = current.next;
     }
 
-    if (head2 != null)
-    {
-      while (head2 != null)
-      {
-        current.next = head2;
-        head2 = head2.next;
-      }
-    }
-
     if (head1 != null)
     {
       while (head1 != null)
       {
         current.next = head1;
         head1 = head1.next;
+
+        current = current.next;
       }
     }
 
+    if (head2 != null)
+    {
+      while (head2 != null)
+      {
+        current.next = head2;
+        head2 = head2.next;
 
-    return toReturn;
+        current = current.next;
+      }
+    }
+
+    return start.next;
   }
 
   public static void main(String[] args)
   {
-    ListNode head1 = new ListNode(1);
-    head1.next = new ListNode(2);
-    head1.next.next = new ListNode(4);
+    ListNode head1 = new ListNode(-9);
+    head1.next = new ListNode(3);
 
-    ListNode head2 = new ListNode(1);
-    head2.next = new ListNode(3);
-    head2.next.next = new ListNode(5);
+    ListNode head2 = new ListNode(5);
+    head2.next = new ListNode(7);
 
     ListNode mergedList = mergeTwoLists(head1, head2);
 
@@ -94,5 +79,4 @@ class Solution
     }
     System.out.println();
   }
-  //
 }
