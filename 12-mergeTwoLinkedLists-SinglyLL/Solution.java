@@ -3,6 +3,7 @@
  * "Merge Two Linked Lists"
  * 2024-06-30
  */
+
 class Solution
 {
   public static ListNode mergeTwoLists(ListNode list1, ListNode list2)
