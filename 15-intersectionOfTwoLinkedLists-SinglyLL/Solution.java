@@ -5,7 +5,7 @@ public class Solution
     ListNode currentA = headA;
     ListNode currentB = headB;
 
-    ListNode toReturn = null;
+    ListNode toReturn;
 
     int sizeA = 0;
     int sizeB = 0;
@@ -33,31 +33,13 @@ public class Solution
         try
         {
           currentA = currentA.next;
-        }
-        catch (NullPointerException e)
+        } catch (NullPointerException e)
         {
           break;
         }
       }
 
-      while (currentA != null || currentB != null)
-      {
-        if (currentA == currentB)
-        {
-          return currentA;
-        }
-        else
-        {
-          try
-          {
-            currentA = currentA.next;
-            currentB = currentB.next;
-          } catch (NullPointerException e)
-          {
-            return null;
-          }
-        }
-      }
+      toReturn = incrementNode(currentA, currentB);
     }
     else if (sizeA < sizeB)
     {
@@ -67,32 +49,12 @@ public class Solution
         diff--;
       }
 
-      while (currentA != null || currentB != null)
-      {
-        if (currentA == currentB)
-        {
-          return currentA;
-        }
-        else
-        {
-          try
-          {
-            currentA = currentA.next;
-            currentB = currentB.next;
-          } catch (NullPointerException e)
-          {
-            return null;
-          }
-        }
-      }
+      toReturn = incrementNode(currentA, currentB);
     }
     else
     {
       toReturn = incrementNode(currentA, currentB);
     }
-
-
-
 
     return toReturn;
   }
@@ -117,5 +79,7 @@ public class Solution
         }
       }
     }
+
+    return null;
   }
 }
