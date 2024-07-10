@@ -13,51 +13,47 @@ class Solution
 
     while (currentNode != null)
     {
-      if (currentNode.next != null)
+
+      if (currentHead.val == val)
       {
-        if (currentHead.val == val)
+        // The head of the list is an illegal value
+        System.out.println("The head of the list is an illegal value");
+        currentHead = currentHead.next;
+        currentNode = currentNode.next;
+      }
+    }
+
+    // Reset currentNode pointer to original head
+    currentNode = head;
+
+    while (currentNode != null)
+    {
+      if (currentNode.next.val == val)
+      {
+        currentNode.next = currentNode.next.next;
+        while (currentNode.val)
+      }
+    }
+
+
+
+
+      else if (currentNode.next.val == val)
+      {
+        System.out.println("Encountered an illegal value that is not the head");
+        currentNode.next = currentNode.next.next;
+        if (currentNode.next != null && currentNode.next.val == val)
         {
-          // The head of the list is an illegal value
-          System.out.println("The head of the list is an illegal value");
-          if (currentHead.next.val != val && currentNode.next.val != val)
-          {
-            currentHead = currentHead.next;
-            currentNode = currentNode.next;
-          }
-          else
-          {
-
-          }
-
-
-        }
-        else if (currentNode.next.val == val)
-        {
-          System.out.println("Encountered an illegal value that is not the head");
           currentNode.next = currentNode.next.next;
-          if (currentNode.next != null && currentNode.next.val == val)
-          {
-            currentNode.next = currentNode.next.next;
-          }
-          currentNode = currentNode.next;
         }
-        else
-        {
-          currentNode = currentNode.next;
-        }
+        currentNode = currentNode.next;
       }
       else
       {
-        // If the Linked List only contains one value:
-        if (currentHead.val == val)
-        {
-          return null; // the only node had an illegal value
-        }
-        else
-        {
-          return currentHead; // the only node had a legal value, return it
-        }
+        currentNode = currentNode.next;
       }
+
+
 
     }
 
@@ -67,13 +63,13 @@ class Solution
 
   public static void main(String[] args)
   {
-//    ListNode head = new ListNode(1);
-//    ListNode second = new ListNode(2);
-//    ListNode third = new ListNode(6);
-//    ListNode fourth = new ListNode(3);
-//    ListNode fifth = new ListNode(4);
-//    ListNode sixth = new ListNode(5);
-//    ListNode seventh = new ListNode(6);
+    //    ListNode head = new ListNode(1);
+    //    ListNode second = new ListNode(2);
+    //    ListNode third = new ListNode(6);
+    //    ListNode fourth = new ListNode(3);
+    //    ListNode fifth = new ListNode(4);
+    //    ListNode sixth = new ListNode(5);
+    //    ListNode seventh = new ListNode(6);
     ListNode head = new ListNode(9);
     ListNode second = new ListNode(9);
     ListNode third = new ListNode(9);
@@ -121,4 +117,4 @@ class Solution
   }
 
 
-  }
+}
