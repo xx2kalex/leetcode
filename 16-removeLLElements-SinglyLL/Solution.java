@@ -15,18 +15,17 @@ class Solution
     {
       if (currentHead.val == val)
       {
-        // System.out.println("The head of the list is an illegal value");
+        // Illegal head, move head pointer to the next node
         currentHead = currentHead.next;
         currentNode = currentNode.next;
         System.out.println("Current head: " + currentHead);
       }
       else
       {
-        // System.out.println("The head of the list is legal, moving on to the rest");
+        // The head is legal and we can move on to the body
         break;
       }
     }
-    // System.out.println("Exited first while loop");
 
     if (currentHead != null)
     {
@@ -42,36 +41,31 @@ class Solution
 
     while (currentNode != null)
     {
-      // System.out.println("Inside second while loop");
       if (currentNode.next != null && currentNode.next.val == val)
       {
-        // System.out.println("The next value is illegal: " + currentNode.next.val);
-        currentNode.next = currentNode.next.next;
-        // // System.out.println("We will now set the next the next node to be: " + currentNode.next.val);
+        // The next value in the linked list is illegal
+        currentNode.next = currentNode.next.next; // "skip" the next value because it is illegal
         if (currentNode.next != null)
         {
           try
           {
+            // Handles the case of b2b illegal nodes
             while (currentNode.next.val == val)
             {
-              // System.out.println("We have encountered b2b illegal nodes");
-              // System.out.println("We will take illegal node: " + currentNode.next.val);
               currentNode.next = currentNode.next.next;
-              // System.out.println("and set the next node to be: " + currentNode.next.val);
             }
           }
           catch (NullPointerException e)
           {
+            // exit the loop if we encounter a null node
             break;
           }
         }
       }
       else
       {
-        // // System.out.println("The current node's next node " + currentNode.next.val + " was legal");
+        // If the next node is not illegal, move on
         currentNode = currentNode.next;
-        // // System.out.println("We will now check the next node's next node " + currentNode.next.val);
-
       }
     }
 
@@ -124,6 +118,10 @@ class Solution
     printLL(head);
   }
 
+  /**
+   * Helper method to print the linked list
+   * @param head - the head of the linked list
+   */
   public static void printLL(ListNode head)
   {
     ListNode current = head;
