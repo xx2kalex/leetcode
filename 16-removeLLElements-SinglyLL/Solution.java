@@ -18,7 +18,6 @@ class Solution
         // Illegal head, move head pointer to the next node
         currentHead = currentHead.next;
         currentNode = currentNode.next;
-        System.out.println("Current head: " + currentHead);
       }
       else
       {
@@ -115,14 +114,14 @@ class Solution
     int val = 1;
 
     removeElements(head, val);
-    printLL(head);
+    System.out.println(printLL(head));
   }
 
   /**
    * Helper method to print the linked list
    * @param head - the head of the linked list
    */
-  public static void printLL(ListNode head)
+  public static String printLL(ListNode head)
   {
     ListNode current = head;
     String output = "";
@@ -133,6 +132,6 @@ class Solution
       current = current.next;
     }
 
-    System.out.println(output);
+    return output;
   }
 }
