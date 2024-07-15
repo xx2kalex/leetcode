@@ -1,16 +1,45 @@
+class Node
+{
+  int val;
+  Node next;
+  Node prev;
+
+  Node()
+  {
+  }
+
+  Node(int val)
+  {
+    this.val = val;
+  }
+
+  Node(int val, Node next)
+  {
+    this.val = val;
+    this.next = next;
+  }
+
+  Node(int val, Node prev, Node next)
+  {
+    this.val = val;
+    this.next = next;
+    this.prev = prev;
+  }
+}
+
+
 class MyLinkedList
 {
-  static ListNode head;
-  ListNode tail;
+  Node head;
+  Node tail;
 
   public MyLinkedList()
   {
-    tail = head;
   }
 
   public int get(int index)
   {
-    ListNode current = head;
+    Node current = head;
     int counter = 0;
 
     while (current != null)
@@ -34,10 +63,10 @@ class MyLinkedList
 
   public void addAtHead(int val)
   {
-    ListNode nodeToAdd = new ListNode(val);
+    Node nodeToAdd = new Node(val);
     nodeToAdd.next = head;
     head = nodeToAdd;
-    if (getLength(head) == 1)
+    if (tail == null)
     {
       tail = head;
     }
@@ -45,7 +74,12 @@ class MyLinkedList
 
   public void addAtTail(int val)
   {
-    ListNode nodeToAdd = new ListNode(val);
+    Node nodeToAdd = new Node(val);
+    if (tail == null)
+    { // List is empty
+      head = nodeToAdd;
+      tail = nodeToAdd;
+    }
     tail.next = nodeToAdd;
     nodeToAdd.prev = tail;
     tail = nodeToAdd;
@@ -67,8 +101,8 @@ class MyLinkedList
     }
     else
     {
-      ListNode nodeToAdd = new ListNode(val);
-      ListNode current = head;
+      Node nodeToAdd = new Node(val);
+      Node current = head;
       int counter = 0;
 
       while (current != null)
@@ -99,16 +133,39 @@ class MyLinkedList
     {
       return;
     }
+    if (index == 0)
+    {
+      if (head == tail)
+      {
+        head = null;
+        tail = null;
+      }
+      else
+      {
+        head = head.next;
+        if (head != null)
+        {
+          head.prev = null;
+        }
+      }
+    }
     else
     {
-      ListNode current = head;
+      Node current = head;
       int counter = 0;
 
       while (current != null)
       {
-        if (counter == index)
+        if (counter == index - 1)
         {
-          current.prev.next = current.next;
+          if (current.next.next != null)
+          {
+            current.next = current.next.next;
+          }
+          else
+          {
+            current.next = null;
+          }
 
           break;
         }
@@ -121,9 +178,9 @@ class MyLinkedList
     }
   }
 
-  private int getLength(ListNode head)
+  private int getLength(Node head)
   {
-    ListNode current = head;
+    Node current = head;
     int length = 0;
 
     while (current != null)
@@ -135,34 +192,9 @@ class MyLinkedList
     return length;
   }
 
-  private static String printLL(ListNode head)
-  {
-    ListNode current = head;
-    String output = "";
 
-    while (current != null)
-    {
-      output = output + current.val + "->";
-      current = current.next;
-    }
-
-    return output;
-  }
-
-  public static void main(String[] args)
-  {
-    MyLinkedList myLinkedList = new MyLinkedList();
-    myLinkedList.addAtHead(1);
-    System.out.println(printLL(head));
-    myLinkedList.addAtTail(3);
-    System.out.println(printLL(head));
-    myLinkedList.addAtIndex(1, 2);    // linked list becomes 1->2->3
-    System.out.println(printLL(head));
-    myLinkedList.get(1);              // return 2
-    myLinkedList.deleteAtIndex(1);    // now the linked list is 1->3
-    System.out.println(printLL(head));
-    myLinkedList.get(1);              // return 3
-    System.out.println(printLL(head));
-  }
 }
+
+
+
 
