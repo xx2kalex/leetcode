@@ -1,3 +1,9 @@
+/**
+ * LeetCode Linked List Problem #203
+ * "Remove Linked List Elements"
+ * 2024-07
+ */
+
 class Solution
 {
   public static ListNode removeElements(ListNode head, int val)
