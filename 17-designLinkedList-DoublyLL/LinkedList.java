@@ -220,8 +220,6 @@ class MyLinkedList
 
     return length;
   }
-
-
 }
 
 
