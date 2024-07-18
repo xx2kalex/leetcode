@@ -1,7 +1,7 @@
 /**
  * LeetCode Linked List Problem #160
  * "Intersection of Two Linked Lists"
- * 2024-07-01
+ * 2024-07
  */
 
 public class Solution
