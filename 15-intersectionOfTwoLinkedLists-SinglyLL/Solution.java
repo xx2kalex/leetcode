@@ -1,3 +1,9 @@
+/**
+ * LeetCode Linked List Problem #160
+ * "Intersection of Two Linked Lists"
+ * 2024-07-01
+ */
+
 public class Solution
 {
   public ListNode getIntersectionNode(ListNode headA, ListNode headB)
