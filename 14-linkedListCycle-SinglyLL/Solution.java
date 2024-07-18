@@ -1,7 +1,7 @@
 /**
  * LeetCode Linked List Problem #141
  * "Linked List Cycle"
- * 2024-07-01
+ * 2024-07
  */
 public class Solution
 {
