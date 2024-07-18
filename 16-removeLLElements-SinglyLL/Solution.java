@@ -77,52 +77,6 @@ class Solution
     return currentHead;
   }
 
-  public static void main(String[] args)
-  {
-//    ListNode head = new ListNode(1);
-//    ListNode second = new ListNode(2);
-//    ListNode third = new ListNode(6);
-//    ListNode fourth = new ListNode(3);
-//    ListNode fifth = new ListNode(4);
-//    ListNode sixth = new ListNode(5);
-//    ListNode seventh = new ListNode(6);
-
-//    ListNode head = new ListNode(9);
-//    ListNode second = new ListNode(9);
-//    ListNode third = new ListNode(9);
-//    ListNode fourth = new ListNode(1);
-//    ListNode fifth = new ListNode(9);
-//    ListNode sixth = new ListNode(9);
-//    ListNode seventh = new ListNode(9);
-
-//    ListNode head = new ListNode(7);
-//    ListNode second = new ListNode(7);
-//    ListNode third = new ListNode(7);
-//    ListNode fourth = new ListNode(7);
-
-    ListNode head = new ListNode(5);
-    ListNode second = new ListNode(4);
-    ListNode third = new ListNode(3);
-    ListNode fourth = new ListNode(2);
-    ListNode fifth = new ListNode(1);
-    ListNode sixth = new ListNode(1);
-
-
-
-    head.next = second;
-    second.next = third;
-    third.next = fourth;
-    fourth.next = fifth;
-    fifth.next = sixth;
-//    sixth.next = seventh;
-    ListNode nullHead = new ListNode();
-
-    int val = 1;
-
-    removeElements(head, val);
-    System.out.println(printLL(head));
-  }
-
   /**
    * Helper method to print the linked list
    * @param head - the head of the linked list
