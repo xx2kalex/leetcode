@@ -50,7 +50,7 @@ class Solution
       {
         // The next value in the linked list is illegal
         currentNode.next = currentNode.next.next; // "skip" the next value because it is illegal
-        if (currentNode.next != null)
+        if (currentNode.next != null && currentNode.next.val == val)
         {
           try
           {
