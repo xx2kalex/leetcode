@@ -27,7 +27,7 @@ class Solution
       }
       else
       {
-        // The head is legal and we can move on to the body
+        // The head is legal, and we can move on to the body
         break;
       }
     }
