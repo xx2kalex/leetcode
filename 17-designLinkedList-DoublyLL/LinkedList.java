@@ -1,3 +1,8 @@
+/**
+ * LeetCode Linked List Problem #707
+ * "Design Linked List"
+ * 2024-07-18
+ */
 class Node
 {
   int val;
@@ -35,6 +40,8 @@ class MyLinkedList
 
   public MyLinkedList()
   {
+    this.head = null;
+    this.tail = null;
   }
 
   public int get(int index)
@@ -64,38 +71,52 @@ class MyLinkedList
   public void addAtHead(int val)
   {
     Node nodeToAdd = new Node(val);
-    nodeToAdd.next = head;
-    head = nodeToAdd;
-    if (tail == null)
+
+    if (head == null)
     {
-      tail = head;
+      // List is empty
+      head = nodeToAdd;
+      tail = nodeToAdd;
+    }
+    else
+    {
+      // ->
+      nodeToAdd.next = head;
+      head = nodeToAdd;
+
+      // <-
+      nodeToAdd.next.prev = nodeToAdd;
     }
   }
 
   public void addAtTail(int val)
   {
     Node nodeToAdd = new Node(val);
-    if (tail == null)
+    if (head == null)
     { // List is empty
       head = nodeToAdd;
       tail = nodeToAdd;
     }
-    tail.next = nodeToAdd;
-    nodeToAdd.prev = tail;
-    tail = nodeToAdd;
+    else
+    {
+      tail.next = nodeToAdd;
+      nodeToAdd.prev = tail;
+      tail = tail.next;
+    }
   }
 
   public void addAtIndex(int index, int val)
   {
-    if (index > getLength(head) + 1)
+    if (index > getLength(head))
     {
+      // Invalid index
       return;
     }
     if (index == 0)
     {
       addAtHead(val);
     }
-    if (index == getLength(head) + 1)
+    if (index == getLength(head))
     {
       addAtTail(val);
     }
@@ -129,11 +150,12 @@ class MyLinkedList
 
   public void deleteAtIndex(int index)
   {
-    if (index < 0 || index > getLength(head))
+    if (index < 0 || index >= getLength(head))
     {
+      // Invalid index
       return;
     }
-    if (index == 0)
+    else if (index == 0)
     {
       if (head == tail)
       {
@@ -149,6 +171,11 @@ class MyLinkedList
         }
       }
     }
+    else if (index == getLength(head) - 1)
+    {
+      tail = tail.prev;
+      tail.next = null;
+    }
     else
     {
       Node current = head;
@@ -160,7 +187,9 @@ class MyLinkedList
         {
           if (current.next.next != null)
           {
+            current.next.next.prev = current;
             current.next = current.next.next;
+
           }
           else
           {

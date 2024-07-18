@@ -59,22 +59,18 @@ public class Main
     linkedList.addAtHead(2);
     linkedList.addAtHead(1);
     linkedList.addAtIndex(3, 0);
-    System.out.println("#" + printLL(linkedList.head));
     linkedList.deleteAtIndex(2);
     linkedList.addAtHead(6);
-    System.out.println("@" + printLL(linkedList.head));
     linkedList.addAtTail(4);
-    System.out.println("@" + printLL(linkedList.head));
     linkedList.get(4);
     linkedList.addAtHead(4);
-    System.out.println("#" + printLL(linkedList.head));
     linkedList.addAtIndex(5, 0);
     linkedList.addAtHead(6);
 
 
     String output = printLL(linkedList.head);
 
-    if (!(output.equals("1->")))
+    if (!(output.equals("6->4->6->1->2->0->0->4->")))
     {
       return false;
     }
@@ -82,16 +78,52 @@ public class Main
     return true;
   }
 
+  public static boolean test4()
+  {
+    MyLinkedList linkedList = new MyLinkedList();
+    linkedList.addAtHead(2);
+    linkedList.deleteAtIndex(1);
+    linkedList.addAtHead(2);
+    linkedList.addAtHead(7);
+    linkedList.addAtHead(3);
+    linkedList.addAtHead(2);
+    linkedList.addAtHead(5);
+    linkedList.addAtTail(5);
+    linkedList.get(5);
+    linkedList.deleteAtIndex(6);
+    linkedList.deleteAtIndex(4);
+
+    String output = printLL(linkedList.head);
+
+    if (!(output.equals("5->2->3->7->2->")))
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+  public static void test5()
+  {
+    MyLinkedList linkedList = new MyLinkedList();
+    linkedList.addAtHead(2);
+    linkedList.addAtHead(7);
+    linkedList.addAtHead(3);
+    linkedList.addAtHead(2);
+    linkedList.addAtHead(5);
+    linkedList.addAtIndex(5, 66);
+
+    System.out.println(printLL(linkedList.head));
+  }
 
 
   public static void main(String[] args)
   {
-    MyLinkedList myLinkedList = new MyLinkedList();
-
     System.out.println("Test 1 " + test1());
     System.out.println("Test 2 " + test2());
     System.out.println("Test 3 " + test3());
-
+    System.out.println("Test 4 " + test4());
+    test5();
   }
 }
 
