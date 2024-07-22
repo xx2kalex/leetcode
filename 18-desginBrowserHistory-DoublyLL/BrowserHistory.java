@@ -14,33 +14,28 @@ class Node
   }
 }
 
-
 class BrowserHistory
 {
   Node current = null;
   Node head;
-  Node tail;
-  Node dummyFront;
-  Node dummyBack;
   int length;
   int currentIndex;
 
   public BrowserHistory(String homepage)
   {
     this.head = new Node(homepage);
-    this.tail = head;
-    this.dummyFront = head.prev;
     this.current = this.head;
-    this.dummyBack = tail.next;
     this.length = 1;
     this.currentIndex = 0;
   }
 
+  /**
+   * Visits url from the current page and clears up all the forward history
+   * @param url - website url
+   */
   public void visit(String url)
   {
     Node nodeToAdd = new Node(url);
-
-    // We are always adding at the back because we clear all forward browser history
 
     // current->NTA
     Node placeholderPointer = current.next;
@@ -62,6 +57,7 @@ class BrowserHistory
     // Move current up to the newly added node
     current = nodeToAdd;
 
+    // Deletes all the forward history
     Node temp = nodeToAdd.next;
     while (temp != null)
     {
@@ -78,8 +74,14 @@ class BrowserHistory
     currentIndex++;
   }
 
+  /**
+   * Moves back in the list
+   * @param steps - how many websites back we move
+   * @return - url of the website where we land
+   */
   public String back(int steps)
   {
+    // Adjusts steps to maximum number of steps, if needed
     if (steps > currentIndex)
     {
       steps = currentIndex;
@@ -92,12 +94,17 @@ class BrowserHistory
       currentIndex--;
     }
 
-    System.out.println("You are now back at: " + current.website + " at index: " + currentIndex);
     return current.website;
   }
 
+  /**
+   * Moves forward in the list
+   * @param steps - how many websites forward we move
+   * @return - url of the website where we land
+   */
   public String forward(int steps)
   {
+    // Adjusts steps to maximum number of steps, if needed
     if (steps > length - currentIndex - 1)
     {
       steps = length - currentIndex - 1;
@@ -108,14 +115,6 @@ class BrowserHistory
       current = current.next;
       steps--;
       currentIndex++;
-    }
-
-    try
-    {
-      System.out.println("You went forward to: " + current.website + " to index: " + currentIndex);
-    } catch (NullPointerException exception)
-    {
-      System.out.println("You went forward to: null" + " to index: " + currentIndex);
     }
 
     return current.website;

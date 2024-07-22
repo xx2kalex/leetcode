@@ -74,6 +74,21 @@ public class Tester
     return printBrowserHistory(bh).equals("leetcode->google->facebook->linkedin->");
   }
 
+  private static boolean test6()
+  {
+    BrowserHistory bh = new BrowserHistory("leetcode");
+    bh.visit("google");
+    bh.visit("facebook");
+    bh.visit("youtube");
+    bh.visit("linkedin");
+    bh.visit("american");
+    bh.back(1);
+    bh.back(1);
+    bh.visit("united");
+
+    return printBrowserHistory(bh).equals("leetcode->google->facebook->youtube->united->");
+  }
+
 
   public static void main(String[] agrs)
   {
@@ -81,7 +96,8 @@ public class Tester
 //    System.out.println("2: " + test2());
 //    System.out.println("3: " + test3());
 //    System.out.println("4: " + test4());
-    System.out.println("5: " + test5());
+//    System.out.println("5: " + test5());
+    System.out.println("6: " + test6());
 
   }
 }
