@@ -14,84 +14,110 @@ class Node
   }
 }
 
+
 class BrowserHistory
 {
   Node current = null;
   Node head;
   Node tail;
+  Node dummyFront;
   Node dummyBack;
   int length;
+  int currentIndex;
 
   public BrowserHistory(String homepage)
   {
     this.head = new Node(homepage);
     this.tail = head;
+    this.dummyFront = head.prev;
     this.current = this.head;
     this.dummyBack = tail.next;
-    this.length = 0;
+    this.length = 1;
+    this.currentIndex = 0;
   }
 
   public void visit(String url)
   {
     Node nodeToAdd = new Node(url);
 
-    if (length == 1)
+    // We are always adding at the back because we clear all forward browser history
+
+    // current->NTA
+    Node placeholderPointer = current.next;
+
+    current.next = nodeToAdd;
+
+    if (placeholderPointer != null)
     {
-      // Adding at the front (after first visited website)
-
-      // ->
-      current.next = nodeToAdd;
-
-      // <-
-      nodeToAdd.prev = current;
-
-      // Move current up to the newly added node
-      current = nodeToAdd;
-
-      // We have two nodes total, so tail becomes current
-
-      tail = current;
+      // NTA->NTA.next
+      nodeToAdd.next = placeholderPointer;
+      // NTA<-NTA.next
+      placeholderPointer.prev = nodeToAdd;
     }
-    else if (current.next == dummyBack && length > 1)
+
+    // current<-NTA
+    nodeToAdd.prev = current;
+
+
+    // Move current up to the newly added node
+    current = nodeToAdd;
+
+    Node temp = nodeToAdd.next;
+    while (temp != null)
     {
-      // Adding at the back, if not after the first visited website
-
-      // <-
-      dummyBack.prev.next = nodeToAdd;
-
-      // ->
-      nodeToAdd.next = dummyBack;
-
-      // Update tail pointer
-      tail = tail.next;
+      Node next = temp.next;
+      temp.next = null;
+      temp.prev = null;
+      temp = next;
+      length--;
     }
-    else
-    {
-      // Adding somewhere in the middle
 
-      // ->
-      nodeToAdd.prev = current.prev;
-
-      // <-
-      nodeToAdd.next = current.next;
-
-      // Set current to be recently added node
-      current = nodeToAdd;
-    }
+    current.next = null;
 
     length++;
+    currentIndex++;
   }
 
   public String back(int steps)
   {
+    if (steps > currentIndex)
+    {
+      steps = currentIndex;
+    }
 
+    while (steps != 0)
+    {
+      current = current.prev;
+      steps--;
+      currentIndex--;
+    }
 
-    return null;
+    System.out.println("You are now back at: " + current.website + " at index: " + currentIndex);
+    return current.website;
   }
 
   public String forward(int steps)
   {
+    if (steps > length - currentIndex - 1)
+    {
+      steps = length - currentIndex - 1;
+    }
 
-    return null;
+    while (steps != 0)
+    {
+      current = current.next;
+      steps--;
+      currentIndex++;
+    }
+
+    try
+    {
+      System.out.println("You went forward to: " + current.website + " to index: " + currentIndex);
+    } catch (NullPointerException exception)
+    {
+      System.out.println("You went forward to: null" + " to index: " + currentIndex);
+    }
+
+    return current.website;
   }
 }
