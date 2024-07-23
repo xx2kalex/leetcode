@@ -14,6 +14,20 @@ public class Tester
     return output;
   }
 
+  private static String printBrowserHistoryNeet(NeetSolution bh)
+  {
+    ListNode current = bh.head;
+    String output = "";
+
+    while (current != null)
+    {
+      output = output + current.url + "->";
+      current = current.forward;
+    }
+
+    return output;
+  }
+
   private static boolean test1()
   {
     BrowserHistory bh = new BrowserHistory("google.com");
@@ -89,15 +103,32 @@ public class Tester
     return printBrowserHistory(bh).equals("leetcode->google->facebook->youtube->united->");
   }
 
+  private static boolean test7()
+  {
+    NeetSolution neetSolution = new NeetSolution("leetcode");
+    neetSolution.visit("google");
+    neetSolution.visit("facebook");
+    neetSolution.visit("youtube");
+    neetSolution.visit("linkedin");
+    neetSolution.visit("american");
+    neetSolution.back(1);
+    neetSolution.back(1);
+    neetSolution.visit("united");
+
+    return printBrowserHistoryNeet(neetSolution).equals(
+        "leetcode->google->facebook->youtube->united->");
+  }
+
 
   public static void main(String[] agrs)
   {
-//    System.out.println("1: " + test1());
-//    System.out.println("2: " + test2());
-//    System.out.println("3: " + test3());
-//    System.out.println("4: " + test4());
-//    System.out.println("5: " + test5());
-    System.out.println("6: " + test6());
+    //    System.out.println("1: " + test1());
+    //    System.out.println("2: " + test2());
+    //    System.out.println("3: " + test3());
+    //    System.out.println("4: " + test4());
+    //    System.out.println("5: " + test5());
+    //    System.out.println("6: " + test6());
+    System.out.println("7: " + test7());
 
   }
 }
