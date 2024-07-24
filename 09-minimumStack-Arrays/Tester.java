@@ -24,6 +24,7 @@ public class Tester
     ms.pop();
     ms.pop();
     ms.pop();
+
     ms.getMin();
 
     return true;

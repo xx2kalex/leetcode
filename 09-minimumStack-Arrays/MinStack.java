@@ -1,26 +1,26 @@
+/**
+ * LeetCode Stack Problem #155
+ * "Min Stack"
+ * 2024-07-24
+ */
 class Node
 {
   int val;
   Node next;
   Node prev;
-  int min;
+  int minOfStack;
 
-  Node()
-  {
-  }
-
-  Node(int val)
+  Node(int val, int minOfStack)
   {
     this.val = val;
+    this.minOfStack = minOfStack;
   }
 }
-
 
 class MinStack
 {
   Node tail;
   Node topNode = tail;
-  Node minimumNode = tail;
 
   public MinStack()
   {
@@ -28,38 +28,25 @@ class MinStack
 
   public void push(int val)
   {
-    Node nodeToAdd = new Node(val);
-
     if (topNode == null)
     {
+      Node nodeToAdd = new Node(val, val);
       tail = nodeToAdd;
-      minimumNode = nodeToAdd;
-      nodeToAdd.min = nodeToAdd.val;
+      topNode = nodeToAdd;
     }
     else
     {
-      if (nodeToAdd.val < minimumNode.val)
-      {
-        minimumNode = nodeToAdd;
-      }
+      Node nodeToAdd = new Node(val, Math.min(val, topNode.minOfStack));
 
       topNode.prev = nodeToAdd;
       nodeToAdd.next = topNode;
 
+      topNode = nodeToAdd;
     }
-
-
-    topNode = nodeToAdd;
   }
 
   public void pop()
   {
-    boolean needToUpdateMin = false;
-
-    if (topNode == minimumNode)
-    {
-      needToUpdateMin = true;
-    }
     if (topNode.next != null)
     {
       topNode = topNode.next;
@@ -70,29 +57,6 @@ class MinStack
       topNode = null;
       tail = null;
     }
-
-    if (needToUpdateMin)
-    {
-      updateMinimumNode();
-    }
-  }
-
-  private void updateMinimumNode()
-  {
-    Node iterationNode = topNode;
-    minimumNode = iterationNode;
-
-    while (iterationNode != null)
-    {
-      if (iterationNode.val < minimumNode.val)
-      {
-        minimumNode = iterationNode;
-      }
-
-      iterationNode = iterationNode.next;
-    }
-
-
   }
 
   public int top()
@@ -102,8 +66,6 @@ class MinStack
 
   public int getMin()
   {
-
-    System.out.println("minimum: " + minimumNode.val);
-    return minimumNode.val;
+    return topNode.minOfStack;
   }
 }
