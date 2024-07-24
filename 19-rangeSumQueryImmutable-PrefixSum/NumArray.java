@@ -1,3 +1,8 @@
+/**
+ * LeetCode Prefix Sum Problem #303
+ * "Range Sum Query - Immutable"
+ * 2024-07-22
+ */
 class NumArray
 {
   int[] prefixSum;
