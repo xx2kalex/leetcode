@@ -1,3 +1,8 @@
+/**
+ * LeetCode Doubly Linked List Problem #1472
+ * "Design Browser History"
+ * 2024-07-24
+ */
 class Node
 {
   String website;
