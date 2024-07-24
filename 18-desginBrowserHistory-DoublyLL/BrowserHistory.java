@@ -1,7 +1,7 @@
 /**
  * LeetCode Doubly Linked List Problem #1472
  * "Design Browser History"
- * 2024-07-24
+ * 2024-07-22
  */
 class Node
 {
