@@ -1,56 +1,109 @@
-import java.util.ArrayList;
-import java.util.Stack;
-
-public class MinStack
+class Node
 {
-  ArrayList<Integer> stack = new ArrayList<>();
-  ArrayList<Integer> minStack = new ArrayList<>();
+  int val;
+  Node next;
+  Node prev;
+  int min;
+
+  Node()
+  {
+  }
+
+  Node(int val)
+  {
+    this.val = val;
+  }
+}
+
+
+class MinStack
+{
+  Node tail;
+  Node topNode = tail;
+  Node minimumNode = tail;
 
   public MinStack()
   {
-   this.stack = stack;
-   this.minStack = minStack;
   }
 
-  /**
-   * Pushes the value specified onto the stack
-   *
-   * @param val - value to be pushed
-   */
   public void push(int val)
   {
-    this.stack.add(val);
-    int min = this.minStack.get(0);
+    Node nodeToAdd = new Node(val);
 
-    if (!this.minStack.isEmpty())
+    if (topNode == null)
     {
+      tail = nodeToAdd;
+      minimumNode = nodeToAdd;
+      nodeToAdd.min = nodeToAdd.val;
+    }
+    else
+    {
+      if (nodeToAdd.val < minimumNode.val)
+      {
+        minimumNode = nodeToAdd;
+      }
 
+      topNode.prev = nodeToAdd;
+      nodeToAdd.next = topNode;
+
+    }
+
+
+    topNode = nodeToAdd;
+  }
+
+  public void pop()
+  {
+    boolean needToUpdateMin = false;
+
+    if (topNode == minimumNode)
+    {
+      needToUpdateMin = true;
+    }
+    if (topNode.next != null)
+    {
+      topNode = topNode.next;
+      topNode.prev = null;
+    }
+    else
+    {
+      topNode = null;
+      tail = null;
+    }
+
+    if (needToUpdateMin)
+    {
+      updateMinimumNode();
     }
   }
 
-  /**
-   * Removes the element at the top of the stack
-   */
-  public void pop()
+  private void updateMinimumNode()
   {
-    this.stack.remove(this.stack.size()-1);
+    Node iterationNode = topNode;
+    minimumNode = iterationNode;
+
+    while (iterationNode != null)
+    {
+      if (iterationNode.val < minimumNode.val)
+      {
+        minimumNode = iterationNode;
+      }
+
+      iterationNode = iterationNode.next;
+    }
+
+
   }
 
-  /**
-   * Gets the top element in the stack
-   * @return - the top element in the stack
-   */
   public int top()
   {
-
+    return topNode.val;
   }
 
-  /**
-   * Gets the minimum element in the stack
-   * @return - the minimum element in the stack
-   */
   public int getMin()
   {
 
+    System.out.println("minimum: " + minimumNode.val);
+    return minimumNode.val;
   }
 }
